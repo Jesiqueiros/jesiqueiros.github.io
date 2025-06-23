@@ -150,7 +150,7 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
   .sidebar {
-      width: 20%;
+      width: 100%;
       height: auto;
       position: relative;
       border-right: none;
@@ -770,72 +770,4 @@ body {
   content: '\f3c5';
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
-}
-
-@media (max-width: 768px) {
-  body {
-    flex-direction: column;
-    overflow-x: hidden;
-  }
-
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    padding: 16px;
-    border-bottom: 1px solid var(--color-border-default);
-    border-right: none;
-  }
-
-  .main-container {
-    width: 100%;
-    margin-left: 0;
-    padding: 16px;
-  }
-
-  .nav-menu {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .profile-picture {
-    width: 100px;
-    height: 100px;
-  }
-
-  .section-title {
-    font-size: 20px;
-    padding-bottom: 6px;
-  }
-
-  .about-intro h3 {
-    font-size: 1.5rem;
-  }
-
-  .about-intro p {
-    font-size: 1rem;
-  }
-
-  .skills-grid,
-  .soft-skills-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .timeline-content {
-    padding: 16px;
-  }
-
-  .job-title {
-    font-size: 1.2rem;
-  }
-
-  .experience-title {
-    font-size: 16px;
-  }
-
-  .download-cv {
-    font-size: 14px;
-    padding: 10px 20px;
-  }
 }
