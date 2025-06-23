@@ -10,6 +10,7 @@
   --color-success-fg: #3fb950;
   --color-danger-fg: #f85149;
   --color-primer-shadow-inset: 0 1px 0 rgba(255, 255, 255, 0.03);
+  --color-timeline: #58a6ff; /* Color morado para la timeline */
 }
 
 * {
@@ -103,7 +104,6 @@ body {
   padding: 16px;
 }
 
-
 /* Project Card Styles */
 .project-card {
   border: 1px solid var(--color-border-default);
@@ -121,39 +121,11 @@ body {
   color: var(--color-accent-fg);
 }
 
-.status-badge {
-  display: inline-block;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 2em;
-  background-color: var(--color-success-fg);
-  color: var(--color-canvas-default);
-  margin-left: 8px;
-}
-
-/* Estilo para el estado Finished */
-.status-badge.Finished {
-  background-color: var(--color-primary);
-  color: red;
-}
-
-/* Estilo para el estado Active */
-.status-badge.Active {
-  background-color: var(--color-warning);
-  color: green;
-}
-
-/* Experience Styles */
-.experience-item {
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--color-border-muted);
-}
 
 .date {
   color: var(--color-fg-muted);
   font-size: 14px;
-  margin-bottom: 4px;
+  margin-bottom: px;
 }
 
 /* Contact Styles */
@@ -178,7 +150,7 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
   .sidebar {
-      width: 100%;
+      width: 20%;
       height: auto;
       position: relative;
       border-right: none;
@@ -232,7 +204,6 @@ body {
   animation: fadeIn 0.5s ease-in-out;
 }
 
-
 /* Estilos para la sección Acerca de mí */
 .about-intro {
   margin-bottom: 2rem;
@@ -256,7 +227,6 @@ body {
   flex-direction: column;
   gap: 1.5rem; /* Ajusta el espacio entre los elementos como desees */
 }
-
 
 .about-card {
   background-color: var(--color-canvas-subtle);
@@ -419,7 +389,255 @@ body {
   }
 }
 
-/* Sección de Experiencia Profesional con Tarjetas */
+/* TIMELINE EXPERIENCE STYLES - NUEVA FUNCIONALIDAD */
+.timeline-container {
+  position: relative;
+  padding: 20px 0;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.timeline-header h2 {
+  font-size: 2.5rem;
+  color: var(--color-fg-default);
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--color-timeline), var(--color-accent-fg));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.timeline-subtitle {
+  color: var(--color-fg-muted);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.timeline {
+  position: relative;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--color-timeline), transparent);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-left: calc(50% + 40px);
+  text-align: left;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-right: calc(50% + 40px);
+  text-align: right;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  width: 16px;
+  height: 16px;
+  background: var(--color-timeline);
+  border: 3px solid var(--color-canvas-default);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.8);
+  }
+}
+
+.timeline-content {
+  background: var(--color-canvas-subtle);
+  border: 1px solid var(--color-border-default);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-timeline);
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.2);
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+}
+
+.timeline-item:nth-child(odd) .timeline-content::before {
+  left: -24px;
+  border-right-color: var(--color-border-default);
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+  right: -24px;
+  border-left-color: var(--color-border-default);
+}
+
+.timeline-content:hover::before {
+  border-right-color: var(--color-timeline);
+  border-left-color: var(--color-timeline);
+}
+
+.job-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-fg-default);
+  margin-bottom: 0.5rem;
+}
+
+.company-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.timeline-item:nth-child(even) .company-info {
+  justify-content: flex-end;
+}
+
+.company-name {
+  color: var(--color-timeline);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.job-period {
+  background: var(--color-border-muted);
+  color: var(--color-fg-muted);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.job-description {
+  color: var(--color-fg-muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.job-achievements {
+  list-style: none;
+  padding: 0;
+}
+
+.job-achievements li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 0.5rem;
+  color: var(--color-fg-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.timeline-item:nth-child(even) .job-achievements li {
+  padding-left: 0;
+  padding-right: 20px;
+}
+
+.job-achievements li::before {
+  content: '•';
+  color: var(--color-timeline);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.timeline-item:nth-child(even) .job-achievements li::before {
+  left: auto;
+  right: 0;
+}
+
+/* Responsive Design para Timeline */
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+  
+  .timeline-dot {
+    left: 20px;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-left: 60px;
+    margin-right: 0;
+    text-align: left;
+  }
+  
+  .timeline-content::before {
+    left: -24px !important;
+    right: auto !important;
+    border-right-color: var(--color-border-default) !important;
+    border-left-color: transparent !important;
+  }
+  
+  .timeline-content:hover::before {
+    border-right-color: var(--color-timeline) !important;
+    border-left-color: transparent !important;
+  }
+  
+  .company-info {
+    justify-content: flex-start !important;
+  }
+  
+  .job-achievements li {
+    padding-left: 20px !important;
+    padding-right: 0 !important;
+  }
+  
+  .job-achievements li::before {
+    left: 0 !important;
+    right: auto !important;
+  }
+  
+  .timeline-header h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Sección de Experiencia Profesional con Tarjetas (mantener para compatibilidad) */
 .experience-container {
   display: flex;
   flex-direction: column;
@@ -468,89 +686,88 @@ body {
   line-height: 1.5;
 }
 
-
 /* Modificar los estilos de la sección de contacto para que los contenedores 
    tengan el mismo tamaño que los de otras secciones */
-   .contact-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-  }
-  
-  .contact-card {
-    background-color: var(--color-canvas-subtle);
-    border: 1px solid var(--color-border-default);
-    border-radius: 8px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: transform 0.2s, border-color 0.2s;
-    width: 100%;
-    max-width: 100%;
-    text-decoration: none;
-    color: var(--color-fg-default);
-  }
-  
-  .contact-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-accent-fg);
-  }
-  
-  .contact-icon {
-    font-size: 24px;
-    min-width: 24px;
-    text-align: center;
-    color: var(--color-accent-fg);
-  }
-  
-  .contact-info {
-    font-size: 16px;
-    color: var(--color-fg-default);
-  }
-  
-  /* Botón para Descargar CV */
-  .download-cv {
-    background-color: var(--color-accent-fg);
-    color: #ffffff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-    text-decoration: none;
-    display: inline-block;
-    align-self: flex-start;
-    margin-top: 8px;
-  }
-  
-  .download-cv:hover {
-    background-color: var(--color-accent-emphasis);
-    transform: translateY(-3px);
-  }
-  
-  /* Estilos para los iconos de redes sociales */
-  .contact-icon.github::before {
-    content: '\f09b';
-    font-family: 'Font Awesome 5 Brands';
-  }
-  
-  .contact-icon.linkedin::before {
-    content: '\f08c';
-    font-family: 'Font Awesome 5 Brands';
-  }
-  
-  .contact-icon.email::before {
-    content: '\f0e0';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-  }
-  
-  .contact-icon.location::before {
-    content: '\f3c5';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-  }
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.contact-card {
+  background-color: var(--color-canvas-subtle);
+  border: 1px solid var(--color-border-default);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.2s, border-color 0.2s;
+  width: 100%;
+  max-width: 100%;
+  text-decoration: none;
+  color: var(--color-fg-default);
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-accent-fg);
+}
+
+.contact-icon {
+  font-size: 24px;
+  min-width: 24px;
+  text-align: center;
+  color: var(--color-accent-fg);
+}
+
+.contact-info {
+  font-size: 16px;
+  color: var(--color-fg-default);
+}
+
+/* Botón para Descargar CV */
+.download-cv {
+  background-color: var(--color-accent-fg);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.download-cv:hover {
+  background-color: var(--color-accent-emphasis);
+  transform: translateY(-3px);
+}
+
+/* Estilos para los iconos de redes sociales */
+.contact-icon.github::before {
+  content: '\f09b';
+  font-family: 'Font Awesome 5 Brands';
+}
+
+.contact-icon.linkedin::before {
+  content: '\f08c';
+  font-family: 'Font Awesome 5 Brands';
+}
+
+.contact-icon.email::before {
+  content: '\f0e0';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+}
+
+.contact-icon.location::before {
+  content: '\f3c5';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+}
